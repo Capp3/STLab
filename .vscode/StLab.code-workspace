@@ -150,6 +150,12 @@
     // Docker Compose
     "docker.composeCommand": "docker compose",
     "docker.dockerComposeBuild": true,
-    "docker.dockerComposeDetached": true
+    "docker.dockerComposeDetached": true,
+    "containers.containers.groupBy": "None",
+    "containers.containers.sortBy": "CreatedTime",
+    "containers.images.sortBy": "CreatedTime",
+    "containers.composeBuild": true,
+    "containers.composeDetached": true,
+    "containers.composeCommand": "docker compose"
 	}
 }

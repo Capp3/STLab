@@ -183,8 +183,8 @@ pnpm-lock.yaml
 # =============================================================================
 
 # Docker
-docker-compose.override.yml
-.dockerignore
+*.override.yml
+# .dockerignore
 
 # =============================================================================
 # LOGS & TEMPORARY FILES

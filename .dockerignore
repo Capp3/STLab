@@ -1,0 +1,14 @@
+.cspell/
+.vscode/
+.prettierignore
+.editorconfig
+.github/
+.git/
+.gitignore
+.gitattributes
+.gitconfig
+.gitmodules
+.env
+.cursor/
+docs/
+research/

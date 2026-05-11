@@ -291,6 +291,7 @@ Links are selectable objects in the design canvas and must expose their own stat
 - Latency (Estimated/Measured)
 - Packet Loss / Error State (simulation or measured)
 - Link Status (Up/Down/Degraded)
+- Link Type (Fibre/Copper/Virtual)
 
 #### Complex Network Layout Support
 
