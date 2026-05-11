@@ -64,7 +64,9 @@ body {
   color: #e2e8f0;
   font-size: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
   cursor: pointer;
 }
 
@@ -74,7 +76,9 @@ body {
 
 .stlab-node.selected {
   border-color: rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.6);
 }
 
 .stlab-node-header {
@@ -212,7 +216,16 @@ body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #475569; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}

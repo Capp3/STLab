@@ -1,25 +1,25 @@
-import { Router } from 'express'
-import { db } from '../db/connection.js'
-import { projects, nodes, links, flows, designRevisions } from '../db/schema.js'
-import { eq, and, isNull, desc } from 'drizzle-orm'
-import { createError } from '../middleware/errorHandler.js'
-import { recomputeMetrics } from '../engines/index.js'
-import type { DesignGraph } from '../../shared/types/design.js'
-import { CURRENT_SCHEMA_VERSION } from '../../shared/types/design.js'
-import { v4 as uuidv4 } from 'uuid'
+import { Router } from 'express';
+import { db } from '../db/connection.js';
+import { projects, nodes, links, flows, designRevisions } from '../db/schema.js';
+import { eq, desc } from 'drizzle-orm';
+import { createError } from '../middleware/errorHandler.js';
+import { recomputeMetrics } from '../engines/index.js';
+import type { DesignGraph } from '../../shared/types/design.js';
+import { CURRENT_SCHEMA_VERSION } from '../../shared/types/design.js';
+import { v4 as uuidv4 } from 'uuid';
 
-const router = Router({ mergeParams: true })
+const router = Router({ mergeParams: true });
 
 /** GET /api/v1/projects/:id/design — return current live design state */
 router.get('/', async (req, res, next) => {
   try {
-    const projectId = (req.params as Record<string, string>)['id'] ?? ''
-    const project = await db.query.projects.findFirst({ where: eq(projects.id, projectId) })
-    if (!project || project.deletedAt) throw createError('Project not found', 404, 'NOT_FOUND')
+    const projectId = (req.params as Record<string, string>)['id'] ?? '';
+    const project = await db.query.projects.findFirst({ where: eq(projects.id, projectId) });
+    if (!project || project.deletedAt) throw createError('Project not found', 404, 'NOT_FOUND');
 
-    const projectNodes = await db.query.nodes.findMany({ where: eq(nodes.projectId, projectId) })
-    const projectLinks = await db.query.links.findMany({ where: eq(links.projectId, projectId) })
-    const projectFlows = await db.query.flows.findMany({ where: eq(flows.projectId, projectId) })
+    const projectNodes = await db.query.nodes.findMany({ where: eq(nodes.projectId, projectId) });
+    const projectLinks = await db.query.links.findMany({ where: eq(links.projectId, projectId) });
+    const projectFlows = await db.query.flows.findMany({ where: eq(flows.projectId, projectId) });
 
     const graph: DesignGraph = {
       schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -46,13 +46,13 @@ router.get('/', async (req, res, next) => {
         bandwidthMbps: f.bandwidthMbps,
         properties: f.properties as DesignGraph['flows'][0]['properties'],
       })),
-    }
+    };
 
-    res.json({ data: graph })
+    res.json({ data: graph });
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 /**
  * PUT /api/v1/projects/:id/design — save design (replace all nodes/links/flows + create revision)
@@ -60,26 +60,26 @@ router.get('/', async (req, res, next) => {
  */
 router.put('/', async (req, res, next) => {
   try {
-    const projectId = (req.params as Record<string, string>)['id'] ?? ''
-    const project = await db.query.projects.findFirst({ where: eq(projects.id, projectId) })
-    if (!project || project.deletedAt) throw createError('Project not found', 404, 'NOT_FOUND')
+    const projectId = (req.params as Record<string, string>)['id'] ?? '';
+    const project = await db.query.projects.findFirst({ where: eq(projects.id, projectId) });
+    if (!project || project.deletedAt) throw createError('Project not found', 404, 'NOT_FOUND');
 
-    const graph = req.body as DesignGraph
-    if (!graph?.nodes || !graph?.links) throw createError('Invalid design graph', 400, 'VALIDATION_ERROR')
+    const graph = req.body as DesignGraph;
+    if (!graph?.nodes || !graph?.links) throw createError('Invalid design graph', 400, 'VALIDATION_ERROR');
 
     // Get next revision number
     const lastRevision = await db.query.designRevisions.findFirst({
       where: eq(designRevisions.projectId, projectId),
       orderBy: [desc(designRevisions.revisionNumber)],
-    })
-    const nextRevisionNumber = (lastRevision?.revisionNumber ?? 0) + 1
+    });
+    const nextRevisionNumber = (lastRevision?.revisionNumber ?? 0) + 1;
 
     // Atomic replacement of normalized tables + snapshot creation
     await db.transaction(async (tx) => {
       // Delete existing normalized data
-      await tx.delete(flows).where(eq(flows.projectId, projectId))
-      await tx.delete(links).where(eq(links.projectId, projectId))
-      await tx.delete(nodes).where(eq(nodes.projectId, projectId))
+      await tx.delete(flows).where(eq(flows.projectId, projectId));
+      await tx.delete(links).where(eq(links.projectId, projectId));
+      await tx.delete(nodes).where(eq(nodes.projectId, projectId));
 
       // Insert nodes
       if (graph.nodes.length > 0) {
@@ -92,8 +92,8 @@ router.put('/', async (req, res, next) => {
             positionX: n.position.x,
             positionY: n.position.y,
             properties: n.properties,
-          })),
-        )
+          }))
+        );
       }
 
       // Insert links
@@ -108,8 +108,8 @@ router.put('/', async (req, res, next) => {
             capacityMbps: l.capacityMbps,
             label: l.label,
             properties: l.properties,
-          })),
-        )
+          }))
+        );
       }
 
       // Insert flows
@@ -124,8 +124,8 @@ router.put('/', async (req, res, next) => {
             st2022_7Protected: (f.properties.st2022_7Protected as boolean | undefined) ?? false,
             senderType: (f.properties.senderType as string | undefined) ?? null,
             properties: f.properties,
-          })),
-        )
+          }))
+        );
       }
 
       // Create immutable JSONB revision snapshot (C1 decision)
@@ -135,34 +135,34 @@ router.put('/', async (req, res, next) => {
         revisionNumber: nextRevisionNumber,
         graph: graph,
         schemaVersion: CURRENT_SCHEMA_VERSION,
-      })
+      });
 
       // Mark metrics dirty
-      await tx.update(projects).set({ metricsDirty: true, updatedAt: new Date() }).where(eq(projects.id, projectId))
-    })
+      await tx.update(projects).set({ metricsDirty: true, updatedAt: new Date() }).where(eq(projects.id, projectId));
+    });
 
     // Trigger async metric recomputation
-    recomputeMetrics(projectId).catch((err) => console.error('[design] Metric recompute failed:', err))
+    recomputeMetrics(projectId).catch((err) => console.error('[design] Metric recompute failed:', err));
 
-    res.json({ data: { revisionNumber: nextRevisionNumber, message: 'Design saved' } })
+    res.json({ data: { revisionNumber: nextRevisionNumber, message: 'Design saved' } });
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 /** GET /api/v1/projects/:id/design/revisions — list revision history */
 router.get('/revisions', async (req, res, next) => {
   try {
-    const projectId = (req.params as Record<string, string>)['id'] ?? ''
+    const projectId = (req.params as Record<string, string>)['id'] ?? '';
     const revisions = await db.query.designRevisions.findMany({
       where: eq(designRevisions.projectId, projectId),
       orderBy: [desc(designRevisions.revisionNumber)],
       columns: { id: true, projectId: true, revisionNumber: true, schemaVersion: true, createdAt: true },
-    })
-    res.json({ data: revisions })
+    });
+    res.json({ data: revisions });
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-export default router
+export default router;

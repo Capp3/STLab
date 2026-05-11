@@ -51,7 +51,7 @@ Which parts of the template would this feature affect?
 - [ ] Makefile
 - [ ] Documentation
 - [ ] GitHub templates
-- [ ] Other: ___________
+- [ ] Other: \***\*\_\_\_\*\***
 
 ## Additional Context
 

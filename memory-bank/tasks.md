@@ -13,6 +13,6 @@ Start the next planning cycle with **`/van`** when you pick up new work.
 
 ## Archive index
 
-| Task ID | Summary | Archived |
-|---------|---------|----------|
+| Task ID  | Summary                                                                   | Archived   |
+| -------- | ------------------------------------------------------------------------- | ---------- |
 | TASK-001 | Phase 1 MVP — stack, schema, API, engines, React Flow UI, reports, Docker | 2026-05-11 |

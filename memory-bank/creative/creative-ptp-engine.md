@@ -30,17 +30,18 @@ Post-traversal checks:
 
 ## Violation Types (sourced from research/report-ptp.md)
 
-| Violation | Severity | Source |
-|-----------|----------|--------|
-| `PTP_NO_GRANDMASTER` | error | RFC 7273 §4.3; no GM reachable on PTP path |
-| `PTP_DOMAIN_CONFLICT` | error | RFC 7273 §4.8; conflicting domain numbers on same path |
-| `PTP_SWITCH_NO_CLOCK_MODE` | warning | IEEE 1588-2019; switch on PTP path without BC/TC declared |
-| `PTP_GRANDMASTER_ISOLATED` | warning | IEEE 1588-2019; GM has no PTP-plane links |
-| `PTP_MIXED_TRACEABILITY` | error | RFC 7273 §4.8; traceable + non-traceable mixed at same level |
+| Violation                  | Severity | Source                                                       |
+| -------------------------- | -------- | ------------------------------------------------------------ |
+| `PTP_NO_GRANDMASTER`       | error    | RFC 7273 §4.3; no GM reachable on PTP path                   |
+| `PTP_DOMAIN_CONFLICT`      | error    | RFC 7273 §4.8; conflicting domain numbers on same path       |
+| `PTP_SWITCH_NO_CLOCK_MODE` | warning  | IEEE 1588-2019; switch on PTP path without BC/TC declared    |
+| `PTP_GRANDMASTER_ISOLATED` | warning  | IEEE 1588-2019; GM has no PTP-plane links                    |
+| `PTP_MIXED_TRACEABILITY`   | error    | RFC 7273 §4.8; traceable + non-traceable mixed at same level |
 
 ## Key Field Requirements (from research/report-ptp.md)
 
 ### GrandmasterClock node properties
+
 - `clockIdentity`: string (64-bit EUI-64 format, e.g. "00-1A-2B-FF-FE-3C-4D-5E")
 - `domainNumber`: number (0–127; default 127 for SMPTE ST 2059-2)
 - `priority1`: number (0–255; lower = higher priority)
@@ -52,23 +53,25 @@ Post-traversal checks:
 - `holdoverCapability`: boolean
 
 ### Switch node properties (PTP-relevant)
+
 - `ptpClockMode`: 'boundary' | 'transparent' | null
 - `ptpDomainNumber`: number | null (should match connected GM)
 
 ### Link properties (PTP-relevant)
+
 - `networkPlane`: includes 'ptp'
 - `ptpPresence`: boolean
 - `ptpRoleReference`: string (node ID of GM or BC providing timing on this link)
 
 ## Confidence Levels (aligned with research/report-ptp.md uncertainty model)
 
-| Check | Evidence Level |
-|-------|----------------|
-| GM presence per domain | RFC 7273 §4.3 — normative RFC clause |
-| Domain consistency | RFC 7273 §4.8 — normative RFC clause |
-| Switch clock mode | IEEE 1588-2019 metadata; clause text Unverified → output as `warning` not `error` |
-| Path asymmetry | Secondary guidance only → informational flag, not violation |
-| Offset < 1 µs target | Secondary (WSTS/ATIS) → output as informational, labeled "secondary guidance" |
+| Check                  | Evidence Level                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| GM presence per domain | RFC 7273 §4.3 — normative RFC clause                                              |
+| Domain consistency     | RFC 7273 §4.8 — normative RFC clause                                              |
+| Switch clock mode      | IEEE 1588-2019 metadata; clause text Unverified → output as `warning` not `error` |
+| Path asymmetry         | Secondary guidance only → informational flag, not violation                       |
+| Offset < 1 µs target   | Secondary (WSTS/ATIS) → output as informational, labeled "secondary guidance"     |
 
 ## Implementation Notes
 

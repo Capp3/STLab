@@ -4,16 +4,16 @@
 
 Always use SMPTE-oriented, essence-centric language in UI, reports, and code:
 
-| Use | Avoid |
-|-----|-------|
-| Essence | Signal (when referring to media content) |
-| Flow | Stream (when referring to RTP transport) |
-| Node | Device (in diagram context) |
-| Link | Wire / Cable (in diagram context) |
-| Network Plane | Layer / Domain |
-| Grandmaster | Master Clock |
+| Use              | Avoid                                        |
+| ---------------- | -------------------------------------------- |
+| Essence          | Signal (when referring to media content)     |
+| Flow             | Stream (when referring to RTP transport)     |
+| Node             | Device (in diagram context)                  |
+| Link             | Wire / Cable (in diagram context)            |
+| Network Plane    | Layer / Domain                               |
+| Grandmaster      | Master Clock                                 |
 | Dedicated Switch | Spine Switch (for ST 2110–reserved switches) |
-| Shared Switch | Core Switch (for mixed-traffic switches) |
+| Shared Switch    | Core Switch (for mixed-traffic switches)     |
 
 ## Code Conventions
 

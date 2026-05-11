@@ -1,16 +1,16 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-type RightPanelTab = 'inspector' | 'bandwidth' | 'ptp' | 'violations'
+type RightPanelTab = 'inspector' | 'bandwidth' | 'ptp' | 'violations';
 
 interface UiState {
-  selectedNodeId: string | null
-  selectedEdgeId: string | null
-  rightPanelTab: RightPanelTab
-  showProjectModal: boolean
-  setSelectedNode: (id: string | null) => void
-  setSelectedEdge: (id: string | null) => void
-  setRightPanelTab: (tab: RightPanelTab) => void
-  setShowProjectModal: (show: boolean) => void
+  selectedNodeId: string | null;
+  selectedEdgeId: string | null;
+  rightPanelTab: RightPanelTab;
+  showProjectModal: boolean;
+  setSelectedNode: (id: string | null) => void;
+  setSelectedEdge: (id: string | null) => void;
+  setRightPanelTab: (tab: RightPanelTab) => void;
+  setShowProjectModal: (show: boolean) => void;
 }
 
 export const useUiStore = create<UiState>((set) => ({
@@ -22,4 +22,4 @@ export const useUiStore = create<UiState>((set) => ({
   setSelectedEdge: (id) => set({ selectedEdgeId: id, selectedNodeId: null }),
   setRightPanelTab: (tab) => set({ rightPanelTab: tab }),
   setShowProjectModal: (show) => set({ showProjectModal: show }),
-}))
+}));

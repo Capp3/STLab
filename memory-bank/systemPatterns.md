@@ -3,25 +3,30 @@
 ## Core Architectural Patterns
 
 ### 1. Layered Architecture
+
 ```
-Client (React/React Flow) 
+Client (React/React Flow)
   ↕ REST API (Express)
 Server (Engines + DB layer)
-  ↕ 
+  ↕
 PostgreSQL (system of record)
   ↕ [optional]
 Redis (cache / session / queue)
 ```
 
 ### 2. Design Document Model (Node-RED Analogy)
+
 A **Design Document** is the ST Lab equivalent of a Node-RED flow JSON:
+
 - Versioned graph snapshot (nodes + links + layout)
 - Immutable revisions (design_revisions table)
 - JSONB payload for extensible node/link properties
 - Schema-versioned for forward compatibility
 
 ### 3. Calculation Engine Pattern
+
 All authoritative calculations live **server-side** in `src/server/engines/`:
+
 - `bandwidth.ts` — per-link, per-switch utilization; violation detection
 - `ptp.ts` — grandmaster scoring, BC/TC chain, domain consistency
 - Engines consume the research reports' rules as implementation ground truth
@@ -29,17 +34,20 @@ All authoritative calculations live **server-side** in `src/server/engines/`:
 - Results stored as `derived_metrics` in PostgreSQL with invalidation on design change
 
 ### 4. Network Plane Isolation
+
 - Every link has a `network_plane` field: `media | ptp | nmos | management`
 - Tracing algorithms must not cross planes without explicit bridge construct
 - Violations flagged when plane-crossing detected
 
 ### 5. Essence-Flow Separation
+
 - **Essence** = logical media signal (audio / video / anc / data)
 - **Flow** = network-level RTP session carrying essence(s)
 - One visible link may carry multiple flows; underlying model tracks each flow separately
 - Per RFC 3550 (from research): separate RTP session per essence type by default
 
 ### 6. Report Generation Pipeline
+
 ```
 Saved Design Revision (PostgreSQL)
   → Calculation Engine runs against stored state
@@ -48,9 +56,11 @@ Saved Design Revision (PostgreSQL)
   → PDF generated (Puppeteer) if requested
   → Report artifact stored (PostgreSQL or S3-compatible)
 ```
+
 Reports are **always** generated from persisted state, never from ephemeral editor state.
 
 ### 7. PTP Design Model
+
 - Grandmaster node → boundary/transparent clock switches → endpoints
 - PTP domain tracked per-link
 - BC/TC clock mode fields on switch nodes
@@ -58,7 +68,9 @@ Reports are **always** generated from persisted state, never from ephemeral edit
 - Phase 2+: full chain analysis
 
 ### 8. Validation / Violation Pattern
+
 Violations are computed by engines and surfaced as typed violation objects:
+
 ```typescript
 interface Violation {
   id: string
@@ -70,6 +82,7 @@ interface Violation {
   detail: Record<string, unknown>
 }
 ```
+
 Violations stored in `derived_metrics` and surfaced in the inspector and engineering panels.
 
 ## API Design Patterns

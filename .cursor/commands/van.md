@@ -5,6 +5,7 @@ This command initializes the Memory Bank system, performs platform detection, de
 ## Memory Bank Integration
 
 **CRITICAL:** All Memory Bank files are located in `memory-bank/` directory:
+
 - `memory-bank/tasks.md` - Source of truth for task tracking
 - `memory-bank/activeContext.md` - Current focus
 - `memory-bank/progress.md` - Implementation status
@@ -15,6 +16,7 @@ This command initializes the Memory Bank system, performs platform detection, de
 This command loads rules progressively to optimize context usage:
 
 ### Step 1: Load Core Rules (Always Required)
+
 ```
 Load: .cursor/rules/isolation_rules/main.mdc
 Load: .cursor/rules/isolation_rules/Core/memory-bank-paths.mdc
@@ -23,12 +25,15 @@ Load: .cursor/rules/isolation_rules/Core/file-verification.mdc
 ```
 
 ### Step 2: Load VAN Mode Map
+
 ```
 Load: .cursor/rules/isolation_rules/visual-maps/van_mode_split/van-mode-map.mdc
 ```
 
 ### Step 3: Load Complexity-Specific Rules (Based on Task Analysis)
+
 After determining complexity level, load:
+
 - **Level 1:** `.cursor/rules/isolation_rules/Level1/workflow-level1.mdc`
 - **Level 2-4:** Load plan mode rules (transition to PLAN command)
 
@@ -62,6 +67,7 @@ After determining complexity level, load:
 Type `/van` followed by your task description or initialization request.
 
 Example:
+
 ```
 /van Initialize project for adding user authentication feature
 ```
@@ -70,4 +76,3 @@ Example:
 
 - **Level 1 tasks:** Proceed directly to `/build` command
 - **Level 2-4 tasks:** Use `/plan` command for detailed planning
-

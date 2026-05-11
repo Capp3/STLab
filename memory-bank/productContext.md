@@ -3,6 +3,7 @@
 ## Problem Being Solved
 
 IP convergence (ST 2110) places audio, video, timing, control, and management on shared network infrastructure. Engineers struggle with:
+
 - Path tracing across complex multi-plane topologies
 - Capacity reasoning (bandwidth budgets, switch utilization)
 - Documentation that stays in sync with the design
@@ -30,6 +31,7 @@ Broadcast/media engineers designing ST 2110 facilities and IP media networks.
 ## Reports as First-Class Deliverable
 
 Reports are not an afterthought — they are the primary engineering output. Must be:
+
 - Generated server-side from PostgreSQL state
 - Exportable as HTML and print-ready PDF
 - Reproducible from any saved design revision

@@ -34,7 +34,7 @@ Please describe the tests you ran to verify your changes:
 - [ ] Tested on macOS
 - [ ] Tested on Linux
 - [ ] Tested on Windows
-- [ ] Tested with specific language/framework: ___________
+- [ ] Tested with specific language/framework: \***\*\_\_\_\*\***
 
 ## Screenshots (if appropriate)
 

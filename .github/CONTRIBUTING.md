@@ -184,7 +184,6 @@ git commit -m "docs(readme): improve installation instructions"
 2. Create a Pull Request on GitHub
 
 3. Fill out the PR template completely:
-
    - Clear title describing the change
    - Detailed description of what changed and why
    - Reference any related issues

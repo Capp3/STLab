@@ -1,5 +1,5 @@
-export type ViolationSeverity = 'error' | 'warning' | 'info'
-export type ViolationEntityType = 'node' | 'link' | 'flow' | 'project'
+export type ViolationSeverity = 'error' | 'warning' | 'info';
+export type ViolationEntityType = 'node' | 'link' | 'flow' | 'project';
 
 export type ViolationType =
   // Bandwidth violations
@@ -17,17 +17,17 @@ export type ViolationType =
   // Design violations
   | 'PLANE_CROSSING'
   | 'LINK_NO_CAPACITY'
-  | 'NODE_MISSING_REQUIRED_FIELD'
+  | 'NODE_MISSING_REQUIRED_FIELD';
 
 export interface Violation {
-  id: string
-  projectId: string
-  entityId: string
-  entityType: ViolationEntityType
-  violationType: ViolationType
-  severity: ViolationSeverity
-  message: string
-  detail: Record<string, unknown>
+  id: string;
+  projectId: string;
+  entityId: string;
+  entityType: ViolationEntityType;
+  violationType: ViolationType;
+  severity: ViolationSeverity;
+  message: string;
+  detail: Record<string, unknown>;
 }
 
 export const VIOLATION_LABELS: Record<ViolationType, string> = {
@@ -44,4 +44,4 @@ export const VIOLATION_LABELS: Record<ViolationType, string> = {
   PLANE_CROSSING: 'Network plane crossing',
   LINK_NO_CAPACITY: 'Link has no capacity defined',
   NODE_MISSING_REQUIRED_FIELD: 'Node missing required field',
-}
+};

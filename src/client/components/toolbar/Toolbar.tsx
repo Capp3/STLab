@@ -1,38 +1,40 @@
-import { useDesignStore } from '../../store/designStore.js'
-import { useProjectStore } from '../../store/projectStore.js'
-import { useMetricsStore } from '../../store/metricsStore.js'
+import { useDesignStore } from '../../store/designStore.js';
+import { useProjectStore } from '../../store/projectStore.js';
+import { useMetricsStore } from '../../store/metricsStore.js';
 
 export function Toolbar() {
-  const { isDirty, isSaving, lastSaved, saveDesign } = useDesignStore()
-  const { activeProjectId } = useProjectStore()
-  const { fetchMetrics, loading: metricsLoading } = useMetricsStore()
+  const { isDirty, isSaving, lastSaved, saveDesign } = useDesignStore();
+  const { activeProjectId } = useProjectStore();
+  const { fetchMetrics, loading: metricsLoading } = useMetricsStore();
 
   const handleSave = async () => {
-    if (!activeProjectId) return
+    if (!activeProjectId) return;
     try {
-      await saveDesign(activeProjectId)
-      await fetchMetrics(activeProjectId)
+      await saveDesign(activeProjectId);
+      await fetchMetrics(activeProjectId);
     } catch (err) {
-      console.error('[toolbar] Save failed:', err)
+      console.error('[toolbar] Save failed:', err);
     }
-  }
+  };
 
   const handleComputeMetrics = async () => {
-    if (!activeProjectId) return
-    await fetchMetrics(activeProjectId)
-  }
+    if (!activeProjectId) return;
+    await fetchMetrics(activeProjectId);
+  };
 
   return (
-    <div style={{
-      height: 48,
-      background: '#0d1929',
-      borderBottom: '1px solid #0f3460',
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0 16px',
-      gap: 12,
-      flexShrink: 0,
-    }}>
+    <div
+      style={{
+        height: 48,
+        background: '#0d1929',
+        borderBottom: '1px solid #0f3460',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 16px',
+        gap: 12,
+        flexShrink: 0,
+      }}
+    >
       {/* Logo */}
       <div style={{ fontWeight: 800, fontSize: 16, color: '#3b82f6', letterSpacing: '-0.02em', marginRight: 16 }}>
         ST<span style={{ color: '#e2e8f0' }}>Lab</span>
@@ -88,5 +90,5 @@ export function Toolbar() {
         <span style={{ fontSize: 11, color: '#475569', marginLeft: 'auto' }}>No project open</span>
       )}
     </div>
-  )
+  );
 }

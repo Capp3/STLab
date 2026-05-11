@@ -1,9 +1,9 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
+  "folders": [
+    {
+      "path": "..",
+    },
+  ],
   "settings": {
     // File Associations
     "files.associations": {
@@ -14,7 +14,7 @@
       "Dockerfile*": "dockerfile",
       "docker-compose*.yml": "dockercompose",
       "docker-compose*.yaml": "dockercompose",
-      "*.dockerfile": "dockerfile"
+      "*.dockerfile": "dockerfile",
     },
 
     // Editor Configuration
@@ -30,37 +30,37 @@
       "**/*.pyc": true,
       "**/node_modules": true,
       "**/.next": true,
-      "**/.cache": true
+      "**/.cache": true,
     },
 
     // Formatting - JSON
     "[json]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Formatting - JSON with Comments
     "[jsonc]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Formatting - YAML
     "[yaml]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Formatting - Markdown
     "[markdown]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Markdown Linting
     "markdownlint.config": {
       "MD013": false,
-      "MD033": false
+      "MD033": false,
     },
     // Code Spell Checker — project words in .cspell/custom-dictionary-workspace.txt
     "cSpell.dictionaries": ["custom-dictionary-workspace"],
@@ -69,8 +69,8 @@
         "name": "custom-dictionary-workspace",
         "path": "${workspaceFolder}/.cspell/custom-dictionary-workspace.txt",
         "addWords": true,
-        "scope": "workspace"
-      }
+        "scope": "workspace",
+      },
     },
     // Node.js & JavaScript/TypeScript Configuration
 
@@ -80,8 +80,8 @@
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
-      }
+        "source.organizeImports": "explicit",
+      },
     },
 
     // TypeScript Formatting
@@ -90,8 +90,8 @@
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
-      }
+        "source.organizeImports": "explicit",
+      },
     },
 
     // JSX/TSX Formatting
@@ -100,8 +100,8 @@
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
-      }
+        "source.organizeImports": "explicit",
+      },
     },
 
     "[typescriptreact]": {
@@ -109,17 +109,12 @@
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
-      }
+        "source.organizeImports": "explicit",
+      },
     },
 
     // ESLint Configuration
-    "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact"
-    ],
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.workingDirectories": [{ "mode": "auto" }],
 
     // TypeScript Configuration
@@ -127,18 +122,18 @@
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.updateImportsOnFileMove.enabled": "always",
 
-      // Docker & Container Configuration
+    // Docker & Container Configuration
 
     // Dockerfile Formatting
     "[dockerfile]": {
       "editor.defaultFormatter": "ms-azuretools.vscode-docker",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Docker Compose Formatting
     "[dockercompose]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
+      "editor.formatOnSave": true,
     },
 
     // Docker Extension Configuration
@@ -156,6 +151,6 @@
     "containers.images.sortBy": "CreatedTime",
     "containers.composeBuild": true,
     "containers.composeDetached": true,
-    "containers.composeCommand": "docker compose"
-	}
+    "containers.composeCommand": "docker compose",
+  },
 }

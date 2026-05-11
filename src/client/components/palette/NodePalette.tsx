@@ -1,22 +1,22 @@
-import type { DragEvent } from 'react'
-import { NODE_CATEGORIES, NODE_TYPE_COLORS, NODE_TYPE_LABELS } from '../../../shared/types/nodes.js'
-import type { NodeType } from '../../../shared/types/nodes.js'
+import type { DragEvent } from 'react';
+import { NODE_CATEGORIES, NODE_TYPE_COLORS, NODE_TYPE_LABELS } from '../../../shared/types/nodes.js';
+import type { NodeType } from '../../../shared/types/nodes.js';
 
 function PaletteItem({ nodeType }: { nodeType: NodeType }) {
-  const color = NODE_TYPE_COLORS[nodeType]
-  const label = NODE_TYPE_LABELS[nodeType]
+  const color = NODE_TYPE_COLORS[nodeType];
+  const label = NODE_TYPE_LABELS[nodeType];
 
   const onDragStart = (e: DragEvent) => {
-    e.dataTransfer.setData('application/stlab-node-type', nodeType)
-    e.dataTransfer.effectAllowed = 'move'
-  }
+    e.dataTransfer.setData('application/stlab-node-type', nodeType);
+    e.dataTransfer.effectAllowed = 'move';
+  };
 
   return (
     <div className="palette-item" draggable onDragStart={onDragStart}>
       <div className="palette-dot" style={{ backgroundColor: color }} />
       <span style={{ color: '#cbd5e1', fontSize: 12 }}>{label}</span>
     </div>
-  )
+  );
 }
 
 export function NodePalette() {
@@ -33,7 +33,15 @@ export function NodePalette() {
       }}
     >
       <div style={{ padding: '12px 12px 8px', borderBottom: '1px solid #0f3460' }}>
-        <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748b' }}>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: '#64748b',
+          }}
+        >
           Node Palette
         </div>
         <div style={{ fontSize: 10, color: '#475569', marginTop: 4 }}>Drag nodes onto canvas</div>
@@ -59,5 +67,5 @@ export function NodePalette() {
         </div>
       ))}
     </div>
-  )
+  );
 }

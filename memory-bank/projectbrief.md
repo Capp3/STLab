@@ -25,11 +25,11 @@ Node-RED–inspired: flow-style editor, palette of node types, connectable graph
 
 ## Delivery Phases
 
-| Phase | Focus |
-|-------|-------|
+| Phase   | Focus                                                                                                     |
+| ------- | --------------------------------------------------------------------------------------------------------- |
 | 1 (MVP) | Design canvas, bandwidth/essence tracing, PTP calculations, NMOS metadata, persistence, report generation |
-| 2 | Simulation (time-varying/scenario behavior) |
-| 3 | Deeper NMOS, control-plane features |
+| 2       | Simulation (time-varying/scenario behavior)                                                               |
+| 3       | Deeper NMOS, control-plane features                                                                       |
 
 ## Node Types (Palette)
 

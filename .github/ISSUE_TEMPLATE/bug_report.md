@@ -49,7 +49,7 @@ Which file(s) or configuration(s) are affected?
 - [ ] VSCode settings
 - [ ] Makefile
 - [ ] mkdocs.yml
-- [ ] Other: ___________
+- [ ] Other: \***\*\_\_\_\*\***
 
 ## Screenshots
 
@@ -58,6 +58,7 @@ If applicable, add screenshots to help explain your problem.
 ## Additional Context
 
 Add any other context about the problem here. This could include:
+
 - Error messages
 - Log output
 - Related issues or discussions

@@ -10,11 +10,11 @@
 
 ## Options Considered
 
-| Option | Approach | Key Trade-off |
-|--------|----------|---------------|
-| A | JSONB whole-graph snapshot only | Simple writes; poor SQL reporting |
-| B | Normalized node/link tables only | Great queries; complex revision freeze semantics |
-| **C (Chosen)** | **Normalized live + JSONB snapshot on Save** | **Best of both; slight write complexity** |
+| Option         | Approach                                     | Key Trade-off                                    |
+| -------------- | -------------------------------------------- | ------------------------------------------------ |
+| A              | JSONB whole-graph snapshot only              | Simple writes; poor SQL reporting                |
+| B              | Normalized node/link tables only             | Great queries; complex revision freeze semantics |
+| **C (Chosen)** | **Normalized live + JSONB snapshot on Save** | **Best of both; slight write complexity**        |
 
 ## Architecture
 

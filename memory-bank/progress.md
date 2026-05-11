@@ -4,10 +4,10 @@
 
 **Date:** 2026-05-11
 
-| Artifact | Location |
-|----------|----------|
-| Full task record | `memory-bank/archive/archive-TASK-001.md` |
-| Reflection | `memory-bank/reflection/reflection-TASK-001.md` |
+| Artifact         | Location                                        |
+| ---------------- | ----------------------------------------------- |
+| Full task record | `memory-bank/archive/archive-TASK-001.md`       |
+| Reflection       | `memory-bank/reflection/reflection-TASK-001.md` |
 
 ---
 
@@ -21,7 +21,7 @@ The repository contains a runnable full-stack skeleton: Express API, Drizzle sch
 
 ## BUILD / REFLECT snapshot (historical)
 
-*Merged from pre-archive `progress.md` for traceability.*
+_Merged from pre-archive `progress.md` for traceability._
 
 - **Phase A–E:** Config, schema, API, engines, frontend, Docker — delivered per archive SUMMARY / IMPLEMENTATION.
 - **Validation:** Client and server TypeScript clean; Vite production build succeeded; initial SQL migration generated.

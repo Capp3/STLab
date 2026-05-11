@@ -2,13 +2,13 @@
 
 ## METADATA
 
-| Field | Value |
-|--------|--------|
-| **Task ID** | TASK-001 |
-| **Complexity** | Level 4 |
-| **Started** | 2026-05-11 |
-| **Archived** | 2026-05-11 |
-| **Workflow** | VAN → PLAN → CREATIVE → BUILD → REFLECT → ARCHIVE (complete) |
+| Field          | Value                                                        |
+| -------------- | ------------------------------------------------------------ |
+| **Task ID**    | TASK-001                                                     |
+| **Complexity** | Level 4                                                      |
+| **Started**    | 2026-05-11                                                   |
+| **Archived**   | 2026-05-11                                                   |
+| **Workflow**   | VAN → PLAN → CREATIVE → BUILD → REFLECT → ARCHIVE (complete) |
 
 ---
 
@@ -64,15 +64,15 @@ Per `docs/projectbrief.md` and Phase 1 MVP intent:
 
 ### Key source locations
 
-| Area | Path |
-|------|------|
-| Schema | `src/server/db/schema.ts` |
-| API | `src/server/api/*.ts` |
-| Engines | `src/server/engines/*.ts` |
-| Reports | `src/server/reports/*` |
+| Area         | Path                             |
+| ------------ | -------------------------------- |
+| Schema       | `src/server/db/schema.ts`        |
+| API          | `src/server/api/*.ts`            |
+| Engines      | `src/server/engines/*.ts`        |
+| Reports      | `src/server/reports/*`           |
 | Client shell | `src/client/App.tsx`, `main.tsx` |
-| Canvas | `src/client/components/canvas/` |
-| Shared types | `src/shared/types/` |
+| Canvas       | `src/client/components/canvas/`  |
+| Shared types | `src/shared/types/`              |
 
 ---
 
@@ -97,15 +97,15 @@ Consolidated from `memory-bank/reflection/reflection-TASK-001.md`:
 
 ## REFERENCES
 
-| Document | Path |
-|----------|------|
-| Reflection | `memory-bank/reflection/reflection-TASK-001.md` |
-| Creative C1 | `memory-bank/creative/creative-design-document-model.md` |
-| Creative C2 | `memory-bank/creative/creative-bandwidth-engine.md` |
-| Creative C3 | `memory-bank/creative/creative-ptp-engine.md` |
-| Product context | `memory-bank/productContext.md`, `memory-bank/systemPatterns.md`, `memory-bank/techContext.md` |
-| Project brief | `docs/projectbrief.md` |
-| Research (read-only) | `research/report-st2110.md`, `research/report-bandwidth.md`, `research/report-ptp.md`, etc. |
+| Document             | Path                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| Reflection           | `memory-bank/reflection/reflection-TASK-001.md`                                                |
+| Creative C1          | `memory-bank/creative/creative-design-document-model.md`                                       |
+| Creative C2          | `memory-bank/creative/creative-bandwidth-engine.md`                                            |
+| Creative C3          | `memory-bank/creative/creative-ptp-engine.md`                                                  |
+| Product context      | `memory-bank/productContext.md`, `memory-bank/systemPatterns.md`, `memory-bank/techContext.md` |
+| Project brief        | `docs/projectbrief.md`                                                                         |
+| Research (read-only) | `research/report-st2110.md`, `research/report-bandwidth.md`, `research/report-ptp.md`, etc.    |
 
 ---
 

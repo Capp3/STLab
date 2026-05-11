@@ -1,23 +1,42 @@
-import { BaseEdge, EdgeLabelRenderer, getBezierPath } from '@xyflow/react'
-import type { EdgeProps } from '@xyflow/react'
-import { NETWORK_PLANE_COLORS } from '../../../shared/types/links.js'
-import type { NetworkPlane } from '../../../shared/types/links.js'
-import { useMetricsStore } from '../../store/metricsStore.js'
+import { BaseEdge, EdgeLabelRenderer, getBezierPath } from '@xyflow/react';
+import type { EdgeProps } from '@xyflow/react';
+import { NETWORK_PLANE_COLORS } from '../../../shared/types/links.js';
+import type { NetworkPlane } from '../../../shared/types/links.js';
+import { useMetricsStore } from '../../store/metricsStore.js';
 
 type PlaneEdgeData = {
-  networkPlane?: NetworkPlane
-  capacityMbps?: number
-  label?: string
-  [key: string]: unknown
-}
+  networkPlane?: NetworkPlane;
+  capacityMbps?: number;
+  label?: string;
+  [key: string]: unknown;
+};
 
-export function PlaneEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, selected }: EdgeProps & { data?: PlaneEdgeData }) {
-  const plane = (data?.networkPlane ?? 'media') as NetworkPlane
-  const color = NETWORK_PLANE_COLORS[plane] ?? '#6B7280'
-  const metrics = useMetricsStore((s) => s.data?.metrics.find((m) => m.entityId === id && m.metricType === 'bandwidth'))
-  const utilPct = metrics ? ((metrics.value as Record<string, number>)['utilizationPct'] ?? 0) : null
+export function PlaneEdge({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  data,
+  selected,
+}: EdgeProps & { data?: PlaneEdgeData }) {
+  const plane = (data?.networkPlane ?? 'media') as NetworkPlane;
+  const color = NETWORK_PLANE_COLORS[plane] ?? '#6B7280';
+  const metrics = useMetricsStore((s) =>
+    s.data?.metrics.find((m) => m.entityId === id && m.metricType === 'bandwidth')
+  );
+  const utilPct = metrics ? ((metrics.value as Record<string, number>)['utilizationPct'] ?? 0) : null;
 
-  const [edgePath, labelX, labelY] = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition })
+  const [edgePath, labelX, labelY] = getBezierPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  });
 
   return (
     <>
@@ -58,7 +77,7 @@ export function PlaneEdge({ id, sourceX, sourceY, targetX, targetY, sourcePositi
         </div>
       </EdgeLabelRenderer>
     </>
-  )
+  );
 }
 
-export const edgeTypes = { stlabEdge: PlaneEdge }
+export const edgeTypes = { stlabEdge: PlaneEdge };

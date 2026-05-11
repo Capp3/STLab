@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react'
-import { FlowCanvas } from './components/canvas/FlowCanvas.js'
-import { NodePalette } from './components/palette/NodePalette.js'
-import { PanelTabs } from './components/panels/PanelTabs.js'
-import { Toolbar } from './components/toolbar/Toolbar.js'
-import { ProjectManager } from './components/projects/ProjectManager.js'
-import { useProjectStore } from './store/projectStore.js'
+import { useEffect, useState } from 'react';
+import { FlowCanvas } from './components/canvas/FlowCanvas.js';
+import { NodePalette } from './components/palette/NodePalette.js';
+import { PanelTabs } from './components/panels/PanelTabs.js';
+import { Toolbar } from './components/toolbar/Toolbar.js';
+import { ProjectManager } from './components/projects/ProjectManager.js';
+import { useProjectStore } from './store/projectStore.js';
 
 export default function App() {
-  const [showProjects, setShowProjects] = useState(false)
-  const { activeProjectId, projects, fetchProjects } = useProjectStore()
+  const [showProjects, setShowProjects] = useState(false);
+  const { activeProjectId, projects, fetchProjects } = useProjectStore();
 
   useEffect(() => {
-    fetchProjects()
-  }, [fetchProjects])
+    fetchProjects();
+  }, [fetchProjects]);
 
   // Show project picker on first load when no project is open
   useEffect(() => {
     if (!activeProjectId) {
-      setShowProjects(true)
+      setShowProjects(true);
     }
-  }, [activeProjectId])
+  }, [activeProjectId]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
@@ -31,9 +31,17 @@ export default function App() {
         <button
           onClick={() => setShowProjects(true)}
           style={{
-            padding: '5px 16px', borderRadius: 6, border: '1px solid #1e3a5f',
-            background: '#0d1929', color: '#94a3b8', fontSize: 12, cursor: 'pointer',
-            maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+            padding: '5px 16px',
+            borderRadius: 6,
+            border: '1px solid #1e3a5f',
+            background: '#0d1929',
+            color: '#94a3b8',
+            fontSize: 12,
+            cursor: 'pointer',
+            maxWidth: 300,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
           }}
         >
           {activeProjectId
@@ -52,5 +60,5 @@ export default function App() {
       {/* Project manager modal */}
       {showProjects && <ProjectManager onClose={() => setShowProjects(false)} />}
     </div>
-  )
+  );
 }

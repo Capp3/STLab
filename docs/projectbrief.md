@@ -128,12 +128,12 @@ Postgres is the **mandated primary database**. All durable entities described in
 
 Redis is **optional**. When enabled, it should sit **beside** Postgres, not as a second source of truth. Typical uses:
 
-| Use | Notes |
-| --- | --- |
-| **Derived metrics cache** | Hot rollups (per-switch, per-link utilization) with TTL or explicit invalidation on design save. |
-| **Session / rate limiting** | If the API uses server-side sessions or gateway throttling. |
-| **Job coordination** | Locks, deduplication keys, or backing for a job queue consumer (implementation-specific). |
-| **Real-time / collaboration** (later) | Pub/sub or ephemeral presence; durable state still commits to Postgres. |
+| Use                                   | Notes                                                                                            |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Derived metrics cache**             | Hot rollups (per-switch, per-link utilization) with TTL or explicit invalidation on design save. |
+| **Session / rate limiting**           | If the API uses server-side sessions or gateway throttling.                                      |
+| **Job coordination**                  | Locks, deduplication keys, or backing for a job queue consumer (implementation-specific).        |
+| **Real-time / collaboration** (later) | Pub/sub or ephemeral presence; durable state still commits to Postgres.                          |
 
 If Redis is unavailable, the application must **degrade gracefully** (slower paths or direct Postgres reads), except for features that explicitly require Redis when those features are turned on.
 
@@ -397,14 +397,14 @@ An engineer:
 
 ## 12. Suggested engineering workstreams
 
-| Workstream             | Outcome                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------- |
-| **Schema & API**       | Canonical design JSON schema, versioning, REST or RPC API for save/load/report. |
-| **Persistence**        | **PostgreSQL** schema, migrations, revision model, snapshot tables for metrics; **optional Redis** for cache/session/queue as adopted. |
-| **Editor**             | Node-RED–like UX: palette, wiring, selection, validation feedback.              |
-| **Calculation engine** | Bandwidth aggregation, switch rules, PTP summaries, extensible validators.      |
-| **Reporting**          | Server-side render pipeline, templates, PDF/HTML export, stable IDs in output.  |
-| **Authn/z**            | Decide minimal strategy for internal vs external deployments.                   |
+| Workstream             | Outcome                                                                                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Schema & API**       | Canonical design JSON schema, versioning, REST or RPC API for save/load/report.                                                                                    |
+| **Persistence**        | **PostgreSQL** schema, migrations, revision model, snapshot tables for metrics; **optional Redis** for cache/session/queue as adopted.                             |
+| **Editor**             | Node-RED–like UX: palette, wiring, selection, validation feedback.                                                                                                 |
+| **Calculation engine** | Bandwidth aggregation, switch rules, PTP summaries, extensible validators.                                                                                         |
+| **Reporting**          | Server-side render pipeline, templates, PDF/HTML export, stable IDs in output.                                                                                     |
+| **Authn/z**            | Decide minimal strategy for internal vs external deployments.                                                                                                      |
 | **Ops**                | Docker Compose (app + **Postgres** + **optional Redis**), health checks, backup/restore for Postgres (and Redis RDB/AOF policy if used for non-rebuildable state). |
 
 ---

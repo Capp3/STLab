@@ -1,5 +1,5 @@
-import { defineConfig } from 'drizzle-kit'
-import 'dotenv/config'
+import { defineConfig } from 'drizzle-kit';
+import 'dotenv/config';
 
 export default defineConfig({
   schema: './src/server/db/schema.ts',
@@ -13,4 +13,4 @@ export default defineConfig({
     database: process.env['DB_NAME'] ?? 'stlab',
     ssl: false,
   },
-})
+});

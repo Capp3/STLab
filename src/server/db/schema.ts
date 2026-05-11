@@ -1,4 +1,4 @@
-import { pgTable, text, uuid, integer, real, timestamp, jsonb, boolean } from 'drizzle-orm/pg-core'
+import { pgTable, text, uuid, integer, real, timestamp, jsonb, boolean } from 'drizzle-orm/pg-core';
 
 /** Projects — top-level containers for designs */
 export const projects = pgTable('projects', {
@@ -10,7 +10,7 @@ export const projects = pgTable('projects', {
   /** True when normalized tables have been edited since last metric compute */
   metricsDirty: boolean('metrics_dirty').default(true).notNull(),
   deletedAt: timestamp('deleted_at'),
-})
+});
 
 /**
  * Nodes — live, normalized, source of truth for current design state.
@@ -29,7 +29,7 @@ export const nodes = pgTable('nodes', {
   properties: jsonb('properties').notNull().default({}),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-})
+});
 
 /** Links — plane-aware connections between nodes */
 export const links = pgTable('links', {
@@ -51,7 +51,7 @@ export const links = pgTable('links', {
   properties: jsonb('properties').notNull().default({}),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-})
+});
 
 /**
  * Flows — essence/RTP flows traversing a link.
@@ -75,7 +75,7 @@ export const flows = pgTable('flows', {
   properties: jsonb('properties').notNull().default({}),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-})
+});
 
 /**
  * Design revisions — immutable JSONB snapshots.
@@ -91,7 +91,7 @@ export const designRevisions = pgTable('design_revisions', {
   graph: jsonb('graph').notNull(),
   schemaVersion: text('schema_version').notNull().default('1.0.0'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+});
 
 /** Derived metrics — computed by calculation engines, invalidated on design change */
 export const derivedMetrics = pgTable('derived_metrics', {
@@ -104,7 +104,7 @@ export const derivedMetrics = pgTable('derived_metrics', {
   metricType: text('metric_type').notNull(),
   value: jsonb('value').notNull(),
   computedAt: timestamp('computed_at').defaultNow().notNull(),
-})
+});
 
 /** Violations — cleared and re-computed on each metric run */
 export const violations = pgTable('violations', {
@@ -119,7 +119,7 @@ export const violations = pgTable('violations', {
   message: text('message').notNull(),
   detail: jsonb('detail').notNull().default({}),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+});
 
 /** Reports — generated HTML/PDF artifacts */
 export const reports = pgTable('reports', {
@@ -132,17 +132,17 @@ export const reports = pgTable('reports', {
   status: text('status').notNull().default('pending'),
   artifactPath: text('artifact_path'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+});
 
-export type Project = typeof projects.$inferSelect
-export type NewProject = typeof projects.$inferInsert
-export type Node = typeof nodes.$inferSelect
-export type NewNode = typeof nodes.$inferInsert
-export type Link = typeof links.$inferSelect
-export type NewLink = typeof links.$inferInsert
-export type Flow = typeof flows.$inferSelect
-export type NewFlow = typeof flows.$inferInsert
-export type DesignRevision = typeof designRevisions.$inferSelect
-export type DerivedMetric = typeof derivedMetrics.$inferSelect
-export type Violation = typeof violations.$inferSelect
-export type Report = typeof reports.$inferSelect
+export type Project = typeof projects.$inferSelect;
+export type NewProject = typeof projects.$inferInsert;
+export type Node = typeof nodes.$inferSelect;
+export type NewNode = typeof nodes.$inferInsert;
+export type Link = typeof links.$inferSelect;
+export type NewLink = typeof links.$inferInsert;
+export type Flow = typeof flows.$inferSelect;
+export type NewFlow = typeof flows.$inferInsert;
+export type DesignRevision = typeof designRevisions.$inferSelect;
+export type DerivedMetric = typeof derivedMetrics.$inferSelect;
+export type Violation = typeof violations.$inferSelect;
+export type Report = typeof reports.$inferSelect;
