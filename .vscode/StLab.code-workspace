@@ -62,10 +62,12 @@
       "MD013": false,
       "MD033": false
     },
+    // Code Spell Checker — project words in .cspell/custom-dictionary-workspace.txt
+    "cSpell.dictionaries": ["custom-dictionary-workspace"],
     "cSpell.customDictionaries": {
       "custom-dictionary-workspace": {
         "name": "custom-dictionary-workspace",
-        "path": "${workspaceFolder:StLab}/.cspell/custom-dictionary-workspace.txt",
+        "path": "${workspaceFolder}/.cspell/custom-dictionary-workspace.txt",
         "addWords": true,
         "scope": "workspace"
       }
