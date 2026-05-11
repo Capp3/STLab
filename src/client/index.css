@@ -1,0 +1,218 @@
+@import '@xyflow/react/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas-bg: #1a1a2e;
+  --panel-bg: #16213e;
+  --panel-border: #0f3460;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--canvas-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* React Flow dark canvas */
+.react-flow {
+  background: var(--canvas-bg) !important;
+}
+
+.react-flow__background {
+  background: var(--canvas-bg) !important;
+}
+
+.react-flow__controls {
+  background: var(--panel-bg) !important;
+  border-color: var(--panel-border) !important;
+}
+
+.react-flow__controls-button {
+  background: var(--panel-bg) !important;
+  border-color: var(--panel-border) !important;
+  color: var(--text-primary) !important;
+  fill: var(--text-primary) !important;
+}
+
+.react-flow__minimap {
+  background: var(--panel-bg) !important;
+  border-color: var(--panel-border) !important;
+}
+
+/* Custom node base */
+.stlab-node {
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 0;
+  min-width: 160px;
+  background: #16213e;
+  color: #e2e8f0;
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+
+.stlab-node:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.stlab-node.selected {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.stlab-node-header {
+  padding: 8px 12px;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.stlab-node-body {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.stlab-node-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #e2e8f0;
+  margin-bottom: 4px;
+}
+
+.stlab-node-detail {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.violation-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  z-index: 10;
+}
+
+.violation-badge.error {
+  background: #ef4444;
+  color: white;
+}
+
+.violation-badge.warning {
+  background: #f59e0b;
+  color: white;
+}
+
+/* Panel styles */
+.stlab-panel {
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  height: 100%;
+  overflow-y: auto;
+  color: var(--text-primary);
+}
+
+.stlab-panel-section {
+  padding: 16px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.stlab-panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+/* Form inputs */
+.stlab-input {
+  width: 100%;
+  background: #0f3460;
+  border: 1px solid #1e4a8a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #e2e8f0;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.stlab-input:focus {
+  border-color: #3b82f6;
+}
+
+.stlab-label {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+/* Palette */
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: grab;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  user-select: none;
+  font-size: 12px;
+}
+
+.palette-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.palette-item:active {
+  cursor: grabbing;
+}
+
+.palette-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }

@@ -144,7 +144,7 @@ ai_workspace/
 
 # General build directories
 build/
-dist/
+# dist/
 dist-ssr/
 target/
 out/
@@ -298,6 +298,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.venv-docs/
 
 # pyenv
 .python-version

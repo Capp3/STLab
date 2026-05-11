@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "outDir": "dist/server",
-    "rootDir": "src/server",
+    "rootDir": "src",
     "paths": {
       "@shared/*": ["../shared/*"]
     }

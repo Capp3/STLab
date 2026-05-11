@@ -1,51 +1,27 @@
 # ST Lab — Progress
 
-## Status: PLAN Complete — Creative Phases Identified → BUILD Next
+## ARCHIVE — TASK-001 complete ✅
 
-**Last Updated:** 2026-05-11
+**Date:** 2026-05-11
 
-## What Has Been Established
+| Artifact | Location |
+|----------|----------|
+| Full task record | `memory-bank/archive/archive-TASK-001.md` |
+| Reflection | `memory-bank/reflection/reflection-TASK-001.md` |
 
-- [x] Memory Bank created and populated
-- [x] Project brief fully read and analyzed
-- [x] Research reports reviewed (ST 2110, PTP, bandwidth, AES67)
-- [x] Architecture decisions made (see techContext.md)
-- [x] System patterns defined (see systemPatterns.md)
-- [x] Complexity assessed: Level 4
+---
 
-## Workstream Status
+## Current state (post TASK-001)
 
-| Workstream | Status | Notes |
-|-----------|--------|-------|
-| Memory Bank | ✅ Complete | All core files created |
-| Project scaffold | 🔄 In Progress | Setting up src/, tsconfig, package scripts |
-| PostgreSQL schema | ⬜ Pending | Drizzle schema for all entities |
-| Backend API | ⬜ Pending | Express routes for CRUD + reports |
-| Calculation engines | ⬜ Pending | Bandwidth + PTP engines |
-| Frontend scaffold | ⬜ Pending | React + Vite + React Flow setup |
-| Canvas editor | ⬜ Pending | Node palette + canvas + wiring |
-| Inspector panels | ⬜ Pending | Node/link property editors |
-| Engineering panels | ⬜ Pending | BW trace, PTP summary, violations |
-| Report generation | ⬜ Pending | HTML/PDF pipeline |
-| Docker | ⬜ Pending | Update Compose + Dockerfile for new stack |
+The repository contains a runnable full-stack skeleton: Express API, Drizzle schema and migrations, bandwidth and PTP engines, React Flow editor, report pipeline, and Docker/Compose definitions. Build-time checks (`tsc`, Vite build, Drizzle generate) passed during the BUILD phase.
 
-## Known Issues / Blockers
+**Recommended next work:** manual QA against `docs/projectbrief.md`, automated tests and CI, Inspector link editing completion, optional dist layout cleanup (see archive “Post-archive follow-ups”).
 
-- ~~`package.json` has no `start` script~~ — fixed (VAN phase)
-- ~~`Dockerfile` references `npm start` which doesn't exist~~ — Dockerfile rewrite pending (Phase E)
-- ~~`compose.yml` has `postgres:18`~~ — fixed (VAN phase, now postgres:17)
-- ~~`compose.yml` uses `env:` key~~ — fixed (VAN phase, now `environment:`)
+---
 
-## Phase 1 MVP Checklist
+## BUILD / REFLECT snapshot (historical)
 
-- [ ] Engineer can create a project
-- [ ] Engineer can add nodes to canvas (all 8 types)
-- [ ] Engineer can connect nodes with plane-aware links
-- [ ] Engineer can configure all node datapoints (from §9 of project brief)
-- [ ] Bandwidth and utilization calculated per link and per switch
-- [ ] PTP design fields on Grandmaster and Switch nodes
-- [ ] Violations displayed in UI (oversubscription, plane crossing)
-- [ ] Project state persists in PostgreSQL
-- [ ] Engineer can generate an HTML report
-- [ ] Engineer can export a PDF report
-- [ ] Docker Compose brings up full stack
+*Merged from pre-archive `progress.md` for traceability.*
+
+- **Phase A–E:** Config, schema, API, engines, frontend, Docker — delivered per archive SUMMARY / IMPLEMENTATION.
+- **Validation:** Client and server TypeScript clean; Vite production build succeeded; initial SQL migration generated.

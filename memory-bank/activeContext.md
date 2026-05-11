@@ -1,48 +1,26 @@
 # ST Lab — Active Context
 
-## Current Phase: CREATIVE ✅ → BUILD
+## Current phase: Idle (no active task)
 
-**Mode:** Planning complete — three creative phases identified, then full BUILD sequence
+**Last closed:** TASK-001 archived 2026-05-11 — see `memory-bank/archive/archive-TASK-001.md`.
 
-## Complexity Assessment
+**Next step:** Run **`/van`** when starting a new task so complexity, scope, and Memory Bank entries are refreshed for that work.
 
-**Level 4 (Enterprise/Complex)** — Full application build from greenfield:
-- Multi-workstream: Frontend editor + Backend API + PostgreSQL + Calculation engines + Reports
-- Requires CREATIVE phase for architecture/design decisions
-- Full workflow: VAN → PLAN → CREATIVE → BUILD → REFLECT → ARCHIVE
+---
 
-## Immediate Focus
+## Standing context (unchanged by archive)
 
-Scaffolding the initial project structure:
-1. Update `package.json` with new stack dependencies
-2. Create `src/` directory structure (client + server)
-3. Set up TypeScript configuration
-4. Create PostgreSQL schema (Drizzle)
-5. Implement Express server entrypoint
-6. Set up Vite + React for frontend
-7. Create React Flow canvas foundation
+- **Product:** Browser-hosted ST 2110–oriented system design tool; Node-RED–inspired UX; PostgreSQL system of record; first-class reporting.
+- **Stack:** Node ≥22, Express, Drizzle + PostgreSQL, Vite + React + React Flow + Tailwind + Zustand; optional Redis; Puppeteer for PDF where available.
+- **Research:** `research/*.md` remains source of truth for transport math — do not edit for app logic; implement derived behavior in `src/server/engines/`.
 
-## Key Decisions Made
+---
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Frontend framework | React 18 + React Flow | Purpose-built for node-based editors; active ecosystem |
-| Build tool | Vite | Fast HMR, TypeScript-first, modern |
-| Canvas library | React Flow (Xyflow) | Industry standard for node editors; ST Lab has same mental model |
-| Backend ORM | Drizzle ORM | TypeScript-native, SQL-close, migration support |
-| Styling | Tailwind CSS | Utility-first; good for complex engineering UI |
-| State | Zustand | Lightweight, works cleanly with React Flow |
-| Node-RED approach | Clean-room inspired | Full control; existing NR deps kept for compatible utilities only |
+## Open product / engineering items (carry-forward)
 
-## Open Items (for CREATIVE phase)
+These are **not** assigned to a task ID until the next `/van` / plan cycle:
 
-1. Auth strategy: simple token vs session vs none (internal tool)
-2. Report PDF: Puppeteer in-container vs external renderer
-3. Multi-user: single-user for Phase 1 (concurrent editing deferred)
-4. Simulation readiness: data model hooks only in Phase 1
-
-## Files to NOT Touch
-
-- `research/report-*.md` — domain truth, no edits
-- `research/prompts/` — source prompts, no edits
-- `docs/projectbrief.md` — project brief, no edits (inform only)
+- End-to-end QA and acceptance sign-off vs project brief §9.
+- Automated tests (API, engines) and CI.
+- Edge inspector persistence; AJV validation middleware.
+- Normalize production `dist/` entry path if the nested layout is undesired.

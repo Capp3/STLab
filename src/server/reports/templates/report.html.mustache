@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ST Lab Engineering Report — {{projectName}}</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; line-height: 1.5; padding: 40px; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; color: #0f3460; }
+  h2 { font-size: 16px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #0f3460; color: #0f3460; }
+  h3 { font-size: 14px; margin: 16px 0 8px; color: #16213e; }
+  .meta { color: #555; font-size: 12px; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12px; }
+  th { background: #16213e; color: white; padding: 8px 10px; text-align: left; }
+  td { padding: 6px 10px; border-bottom: 1px solid #e0e0e0; }
+  tr:nth-child(even) { background: #f8f9fa; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .error { background: #fef2f2; color: #ef4444; }
+  .warning { background: #fffbeb; color: #f59e0b; }
+  .info { background: #eff6ff; color: #3b82f6; }
+  .violation-row.error { background: #fef2f2; }
+  .violation-row.warning { background: #fffbeb; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .summary-card { background: #f0f4ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 16px; }
+  .summary-card .value { font-size: 28px; font-weight: 700; color: #0f3460; }
+  .summary-card .label { font-size: 12px; color: #555; margin-top: 4px; }
+  .assumption { font-size: 11px; color: #92400e; background: #fef3c7; padding: 4px 8px; border-radius: 4px; margin: 8px 0; }
+  .util-bar { display: inline-block; width: 80px; height: 8px; background: #e5e7eb; border-radius: 4px; vertical-align: middle; margin-right: 6px; }
+  .util-fill { height: 100%; border-radius: 4px; }
+  @media print { body { padding: 20px; } .summary-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+
+<h1>ST Lab — Engineering Design Report</h1>
+<div class="meta">
+  <strong>Project:</strong> {{projectName}} &nbsp;|&nbsp;
+  <strong>Generated:</strong> {{generatedAt}} &nbsp;|&nbsp;
+  <strong>Schema:</strong> v{{schemaVersion}}
+  {{#projectDescription}}<br><strong>Description:</strong> {{projectDescription}}{{/projectDescription}}
+</div>
+
+<!-- Summary -->
+<h2>Design Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="value">{{nodeInventory.length}}</div>
+    <div class="label">Nodes</div>
+  </div>
+  <div class="summary-card">
+    <div class="value">{{linkInventory.length}}</div>
+    <div class="label">Links</div>
+  </div>
+  <div class="summary-card" style="{{#errorCount}}background:#fef2f2;border-color:#fca5a5{{/errorCount}}">
+    <div class="value" style="{{#errorCount}}color:#ef4444{{/errorCount}}">{{errorCount}}</div>
+    <div class="label">Errors &nbsp; <span class="badge warning">{{warningCount}} warnings</span></div>
+  </div>
+</div>
+
+<!-- Node Inventory -->
+<h2>Node Inventory</h2>
+<table>
+  <tr><th>Label</th><th>Type</th><th>Device Type</th></tr>
+  {{#nodeInventory}}
+  <tr><td>{{label}}</td><td>{{typeName}}</td><td>{{deviceType}}</td></tr>
+  {{/nodeInventory}}
+  {{^nodeInventory}}<tr><td colspan="3" style="color:#999">No nodes in design</td></tr>{{/nodeInventory}}
+</table>
+
+<!-- Bandwidth Budget -->
+<h2>Bandwidth Budget</h2>
+<p class="assumption">ASSUMPTION: Utilization thresholds (80% warning, 100% error) are engineering policy. No normative ceiling is defined in SMPTE ST 2110 standards. Source: research/report-bandwidth.md §4.3</p>
+
+<h3>Per-Link Utilization</h3>
+<table>
+  <tr><th>Link</th><th>Plane</th><th>Source → Target</th><th>Capacity (Mbps)</th><th>Used (Mbps)</th><th>Utilization</th></tr>
+  {{#linkInventory}}
+  <tr>
+    <td>{{label}}</td>
+    <td><span class="badge info">{{planeName}}</span></td>
+    <td>{{sourceLabel}} → {{targetLabel}}</td>
+    <td>{{capacityMbps}}</td>
+    <td>{{usedMbps}}</td>
+    <td>{{utilizationPct}}%</td>
+  </tr>
+  {{/linkInventory}}
+  {{^linkInventory}}<tr><td colspan="6" style="color:#999">No links in design</td></tr>{{/linkInventory}}
+</table>
+
+<h3>Per-Switch Summary</h3>
+<table>
+  <tr><th>Switch</th><th>Type</th><th>Backplane (Gbps)</th><th>Ingress (Mbps)</th><th>Egress (Mbps)</th><th>Backplane Util</th></tr>
+  {{#switchSummary}}
+  <tr>
+    <td>{{label}}</td><td>{{nodeType}}</td><td>{{backplaneGbps}}</td>
+    <td>{{ingressMbps}}</td><td>{{egressMbps}}</td><td>{{backplaneUtilPct}}%</td>
+  </tr>
+  {{/switchSummary}}
+  {{^switchSummary}}<tr><td colspan="6" style="color:#999">No switches in design</td></tr>{{/switchSummary}}
+</table>
+
+<!-- PTP Architecture -->
+<h2>PTP Architecture</h2>
+{{#ptpDomains.length}}
+<table>
+  <tr><th>Domain</th><th>Grandmaster</th><th>Reachable Nodes</th></tr>
+  {{#ptpDomains}}
+  <tr>
+    <td>{{domainNumber}}</td>
+    <td>{{grandmasterLabel}}</td>
+    <td>{{reachableNodeIds.length}}</td>
+  </tr>
+  {{/ptpDomains}}
+</table>
+{{/ptpDomains.length}}
+{{^ptpDomains.length}}<p style="color:#999">No PTP domain data computed. Add a Grandmaster Clock and PTP-plane links.</p>{{/ptpDomains.length}}
+
+<!-- Violations -->
+<h2>Violations</h2>
+{{#hasViolations}}
+<table>
+  <tr><th>Severity</th><th>Type</th><th>Message</th></tr>
+  {{#violations}}
+  <tr class="violation-row {{severity}}">
+    <td><span class="badge {{severity}}">{{severity}}</span></td>
+    <td style="font-size:11px;font-family:monospace">{{violationType}}</td>
+    <td>{{message}}</td>
+  </tr>
+  {{/violations}}
+</table>
+{{/hasViolations}}
+{{^hasViolations}}<p style="color:#16a34a;font-weight:600">✓ No violations detected</p>{{/hasViolations}}
+
+<hr style="margin:40px 0 20px;border:none;border-top:1px solid #e0e0e0" />
+<p style="color:#999;font-size:11px">
+  Generated by ST Lab v0.1.0 &nbsp;|&nbsp;
+  Bandwidth formulas sourced from VSF TR-05:2018 (Informative) and SMPTE ST 2110-20 (Normative pgroup data).
+  PTP analysis sourced from RFC 7273 and IEEE 1588-2019 (metadata level).
+  Labels: ASSUMPTION = engineering policy, not normatively defined in SMPTE standards.
+</p>
+</body>
+</html>
