@@ -1,0 +1,39 @@
+volumes:
+  stlab-data:
+  stlab-db:
+  stlab-redis:
+
+networks:
+  stlab-network:
+
+services:
+  stlab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env:
+      - DB_USER=stlab
+      - DB_PASSWORD=stlab
+      - DB_NAME=stlab
+      - DB_HOST=stlab-db
+      - DB_PORT=5432
+    container_name: stlab
+    ports:
+      - '3000:3000'
+    volumes:
+      - stlab-data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - stlab-network
+  stlab-db:
+    image: postgres:18
+    volumes:
+      - stlab-db:/var/lib/postgresql/data
+    networks:
+      - stlab-network
+  stlab-redis:
+    image: redis:7
+    volumes:
+      - stlab-redis:/data
+    networks:
+      - stlab-network

@@ -12,7 +12,7 @@
 
 ST Lab is a **browser-hosted engineering application** for planning and documenting SMPTE ST 2110 systems before deployment. Users build **visual system diagrams** (nodes and links) that carry **structured engineering data**: essence flows, switch and link capacity, timing (PTP) considerations, and (over time) NMOS-oriented control-plane context.
 
-**First-class outputs** are **reports** suitable for design review and implementation handoff alongside traditional schematics. The interaction model is intentionally aligned with **[Node-RED](https://nodered.org/)** (flow-style editor, palette of node types, connectable graph, inspectable properties). A **database backend** is required so designs, revisions, metrics, and generated reports remain queryable, auditable, and scalable for a strong reporting component.
+**First-class outputs** are **reports** suitable for design review and implementation handoff alongside traditional schematics. The interaction model is intentionally aligned with **[Node-RED](https://nodered.org/)** (flow-style editor, palette of node types, connectable graph, inspectable properties). **PostgreSQL** is the **system of record** so designs, revisions, metrics, and generated reports remain queryable, auditable, and scalable for a strong reporting component. **Redis** may be deployed **optionally** as a cache and acceleration layer (see §6.3); it does not replace Postgres for authoritative data.
 
 Simulation and live orchestration are **out of scope for the initial delivery** but the architecture should not preclude them.
 
@@ -94,9 +94,9 @@ The product owner intends to **follow Node-RED closely** for interaction pattern
 
 ## 6. Data platform and reporting (required)
 
-A **database backend** is a **core requirement**, not an optional cache. Reports must be generated from **authoritative stored state**, not only from in-memory editor models.
+**PostgreSQL-backed persistence** is a **core requirement**. Reports must be generated from **authoritative stored state** in Postgres, not only from in-memory editor models or from Redis alone.
 
-### 6.1 Why a DB is mandatory
+### 6.1 Why PostgreSQL-backed persistence is mandatory
 
 - **Revision history** of designs (who changed what, when) for engineering governance.
 - **Snapshots** for bandwidth tracing over time (`readme.md` calls for time-aware datapoints).
@@ -114,15 +114,28 @@ A **database backend** is a **core requirement**, not an optional cache. Reports
 | **Reports**                                 | Report definitions, generated artifacts, parameters used, timestamps.                                            |
 | **Research / citations** (optional linkage) | Tie-out to internal `research/` outputs for “why this default” in calculators—keeps product honest to standards. |
 
-### 6.3 Technology direction (non-prescriptive)
+### 6.3 Stack: PostgreSQL (required) and Redis (optional)
 
-Pick a mainstream **relational** or **document** store (or hybrid) that supports **transactions**, **migrations**, and **analytic queries**. Consider:
+#### PostgreSQL — system of record
 
-- **Relational** (PostgreSQL): strong for reporting, constraints, and revision tables.
-- **Time-series** extension or separate store if simulation/measurements grow large.
-- **Object storage** (S3-compatible) for large binary report attachments if needed.
+Postgres is the **mandated primary database**. All durable entities described in §6.2 (and the design graph) live here with **ACID transactions**, **schema migrations**, and **SQL** for reporting and ad hoc engineering queries.
 
-The exact choice is an engineering decision; the brief requires **queryable persistence** and a **reporting pipeline** that can run server-side.
+- Use **JSON/JSONB** where graph payloads or extensible node properties benefit from schema flexibility, alongside normalized tables where reporting and constraints are clearer.
+- **Large time-series** (simulation runs, dense bandwidth snapshots) may start in Postgres (partitioned tables or appropriate indexing); if volume later exceeds comfortable Postgres bounds, introduce a dedicated time-series store **without** demoting Postgres as the authority for design revisions and report metadata.
+- **Large binary report artifacts** (PDF blobs) may remain in Postgres for small deployments; **S3-compatible object storage** remains an acceptable offload for bigger files, with Postgres holding pointers, checksums, and generation metadata.
+
+#### Redis — optional cache and supporting services
+
+Redis is **optional**. When enabled, it should sit **beside** Postgres, not as a second source of truth. Typical uses:
+
+| Use | Notes |
+| --- | --- |
+| **Derived metrics cache** | Hot rollups (per-switch, per-link utilization) with TTL or explicit invalidation on design save. |
+| **Session / rate limiting** | If the API uses server-side sessions or gateway throttling. |
+| **Job coordination** | Locks, deduplication keys, or backing for a job queue consumer (implementation-specific). |
+| **Real-time / collaboration** (later) | Pub/sub or ephemeral presence; durable state still commits to Postgres. |
+
+If Redis is unavailable, the application must **degrade gracefully** (slower paths or direct Postgres reads), except for features that explicitly require Redis when those features are turned on.
 
 ### 6.4 Reporting outputs (expectations)
 
@@ -387,19 +400,19 @@ An engineer:
 | Workstream             | Outcome                                                                         |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | **Schema & API**       | Canonical design JSON schema, versioning, REST or RPC API for save/load/report. |
-| **Persistence**        | DB choice, migrations, revision model, snapshot tables for metrics.             |
+| **Persistence**        | **PostgreSQL** schema, migrations, revision model, snapshot tables for metrics; **optional Redis** for cache/session/queue as adopted. |
 | **Editor**             | Node-RED–like UX: palette, wiring, selection, validation feedback.              |
 | **Calculation engine** | Bandwidth aggregation, switch rules, PTP summaries, extensible validators.      |
 | **Reporting**          | Server-side render pipeline, templates, PDF/HTML export, stable IDs in output.  |
 | **Authn/z**            | Decide minimal strategy for internal vs external deployments.                   |
-| **Ops**                | Docker compose (app + DB), health checks, backup/restore story for designs.     |
+| **Ops**                | Docker Compose (app + **Postgres** + **optional Redis**), health checks, backup/restore for Postgres (and Redis RDB/AOF policy if used for non-rebuildable state). |
 
 ---
 
 ## 13. Open decisions for tech lead / product
 
 1. **Node-RED reuse depth:** fork/embed vs inspired editor; impact on GPL strategy and upstream merges.
-2. **DB and hosting:** single-node Postgres vs managed cloud; backup RPO/RTO targets.
+2. **Postgres hosting:** self-managed vs managed cloud; backup RPO/RTO targets; connection pooling (e.g. PgBouncer) if needed.
 3. **Collaboration model:** single-user files vs multi-user concurrent editing (affects DB and sync).
 4. **Simulation source of truth:** whether measured/simulated series supersede design assumptions in reports by default.
 5. **NMOS scope in phase 1:** documentation-only vs any live registry interaction.

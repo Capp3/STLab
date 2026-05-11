@@ -1,3 +1,7 @@
 # Custom Dictionary Words
 SMPTE
 NMOS
+PTP
+NDI
+AES67
+stlab
