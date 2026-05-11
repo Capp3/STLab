@@ -2,6 +2,8 @@
 
 Research workspace for building a high-trust, citation-backed technical truth source for ST 2110 system design in ST Lab.
 
+Prompts run on [Perplexity Pro](https://perplexity.ai/)
+
 ## Goal
 
 Create accurate, standards-grounded reports that support:
