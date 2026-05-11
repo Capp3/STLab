@@ -1,0 +1,4 @@
+# MkDocs and extensions used by mkdocs.yml (CI and local builds)
+mkdocs>=1.6
+mkdocs-bootswatch>=1.1
+pymdown-extensions>=10.0

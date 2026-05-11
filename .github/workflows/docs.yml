@@ -8,8 +8,9 @@ on:
     #paths: # Recommended to avoid extra builds
     #  - .github/workflows/docs.yml # Change name to what your workflow file is
     #  - docs/**
+    #  - research/**
     #  - mkdocs.yml
-    #  - requirements.txt
+    #  - requirements-docs.txt
 
 permissions:
   contents: read
@@ -37,16 +38,16 @@ jobs:
           python-version: 3.12
       - name: Install dependencies
         run: |
-          python -m pip install -U pip setuptools uv
-          uv install pip mkdocs
+          python -m pip install -U pip
+          python -m pip install -r requirements-docs.txt
       - name: Build Pages
-        run: uv run mkdocs build
+        run: python -m mkdocs build
       - name: Configure GitHub Pages.
         uses: actions/configure-pages@v6
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: docs/
+          path: site/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

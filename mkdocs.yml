@@ -28,6 +28,9 @@ theme:
 plugins:
   - search
 
+# Built static site output (GitHub Pages artifact path)
+site_dir: site
+
 # Markdown Extensions
 markdown_extensions:
   - codehilite:
@@ -53,6 +56,9 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
   - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
@@ -61,6 +67,14 @@ markdown_extensions:
 # Page Tree / Navigation
 nav:
   - Home: index.md
+  - Research:
+      - research/index.md
+      - Master package: research/report-master.md
+      - ST 2110: research/report-st2110.md
+      - PTP and timing: research/report-ptp.md
+      - Bandwidth: research/report-bandwidth.md
+      - AES67: research/report-aes67.md
+      - TTML: research/report-ttml.md
 
 # Extra Configuration
 extra:
