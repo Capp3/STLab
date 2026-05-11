@@ -11,12 +11,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env:
+    environment:
+      - NODE_ENV=production
       - DB_USER=stlab
       - DB_PASSWORD=stlab
       - DB_NAME=stlab
       - DB_HOST=stlab-db
       - DB_PORT=5432
+      - REDIS_URL=redis://stlab-redis:6379
+      - PORT=3000
     container_name: stlab
     ports:
       - '3000:3000'
@@ -25,12 +28,26 @@ services:
       - ./logs:/app/logs
     networks:
       - stlab-network
+    depends_on:
+      stlab-db:
+        condition: service_healthy
+      stlab-redis:
+        condition: service_started
   stlab-db:
-    image: postgres:18
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=stlab
+      - POSTGRES_PASSWORD=stlab
+      - POSTGRES_DB=stlab
     volumes:
       - stlab-db:/var/lib/postgresql/data
     networks:
       - stlab-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U stlab -d stlab']
+      interval: 5s
+      timeout: 5s
+      retries: 10
   stlab-redis:
     image: redis:7
     volumes:

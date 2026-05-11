@@ -12,7 +12,7 @@
 
 ST Lab is a **browser-hosted engineering application** for planning and documenting SMPTE ST 2110 systems before deployment. Users build **visual system diagrams** (nodes and links) that carry **structured engineering data**: essence flows, switch and link capacity, timing (PTP) considerations, and (over time) NMOS-oriented control-plane context.
 
-**First-class outputs** are **reports** suitable for design review and implementation handoff alongside traditional schematics. The interaction model is intentionally aligned with **[Node-RED](https://nodered.org/)** (flow-style editor, palette of node types, connectable graph, inspectable properties). **PostgreSQL** is the **system of record** so designs, revisions, metrics, and generated reports remain queryable, auditable, and scalable for a strong reporting component. **Redis** may be deployed **optionally** as a cache and acceleration layer (see §6.3); it does not replace Postgres for authoritative data.
+**First-class outputs** are **reports** suitable for design review and implementation handoff alongside traditional schematics. The interaction model is intentionally aligned with **[Node-RED](https://nodered.org/)** (flow-style editor, palette of node types, connectable graph, inspect-able properties). **PostgreSQL** is the **system of record** so designs, revisions, metrics, and generated reports remain queryable, auditable, and scalable for a strong reporting component. **Redis** may be deployed **optionally** as a cache and acceleration layer (see §6.3); it does not replace Postgres for authoritative data.
 
 Simulation and live orchestration are **out of scope for the initial delivery** but the architecture should not preclude them.
 
