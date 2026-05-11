@@ -1,0 +1,75 @@
+# =============================================================================
+# MkDocs Configuration
+# =============================================================================
+
+# Site Information
+site_name: Vibe Dev Template
+site_description: Universal development template documentation for all project types
+site_author: Developer
+
+# Repository
+# repo_url: https://github.com/yourusername/vibe_dev_template
+# repo_name: GitHub
+
+# Theme Configuration
+# Using mkdocs-bootswatch for modern, responsive design
+# Install: pip install mkdocs-bootswatch
+# Available themes: cerulean, cosmo, cyborg, darkly, flatly, journal, litera,
+#                   lumen, lux, materia, minty, pulse, sandstone, simplex,
+#                   sketchy, slate, solar, spacelab, superhero, united, yeti, zephyr
+theme:
+  name: flatly
+  # Uncomment and change to use a different Bootswatch theme
+  # name: darkly
+  # name: slate
+  # name: superhero
+
+# Plugins
+plugins:
+  - search
+
+# Markdown Extensions
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - tables
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page Tree / Navigation
+nav:
+  - Home: index.md
+
+# Extra Configuration
+extra:
+  social:
+    # Add your social links here
+    # - icon: fontawesome/brands/github
+    #   link: https://github.com/yourusername
+    # - icon: fontawesome/brands/twitter
+    #   link: https://twitter.com/yourusername
+
+# Copyright
+# copyright: Copyright &copy; 2026 Your Name

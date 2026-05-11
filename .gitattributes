@@ -1,0 +1,207 @@
+# =============================================================================
+# Git Attributes Configuration
+# =============================================================================
+# This file controls how Git handles line endings, diffs, merges, and more
+# See: https://git-scm.com/docs/gitattributes
+
+# -----------------------------------------------------------------------------
+# Auto-detect text files and normalize line endings to LF in repository
+# -----------------------------------------------------------------------------
+* text=auto eol=lf
+
+# -----------------------------------------------------------------------------
+# Source Code - Explicit text file declarations
+# -----------------------------------------------------------------------------
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+*.fish text eol=lf
+
+# Python
+*.py text diff=python
+*.py3 text diff=python
+*.pyw text diff=python
+*.pyx text diff=python
+*.pxd text diff=python
+*.pxi text diff=python
+
+# JavaScript/TypeScript
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.mjs text
+*.cjs text
+
+# Web
+*.html text diff=html
+*.htm text diff=html
+*.css text diff=css
+*.scss text diff=css
+*.sass text diff=css
+*.less text diff=css
+
+# Configuration files
+*.json text
+*.yaml text
+*.yml text
+*.toml text
+*.ini text
+*.cfg text
+*.conf text
+*.config text
+
+# Documentation
+*.md text diff=markdown
+*.mdx text diff=markdown
+*.txt text
+*.rtf text
+*.rst text
+*.adoc text
+
+# Docker
+Dockerfile text
+*.dockerfile text
+docker-compose*.yml text
+.dockerignore text
+
+# Git
+.gitignore text
+.gitattributes text
+.gitconfig text
+.gitmodules text
+
+# CI/CD
+.travis.yml text
+.gitlab-ci.yml text
+appveyor.yml text
+*.jenkinsfile text
+
+# Makefiles
+Makefile text
+makefile text
+Makefile.* text
+*.mk text
+
+# -----------------------------------------------------------------------------
+# Binary Files - Explicitly mark as binary
+# -----------------------------------------------------------------------------
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.webp binary
+*.bmp binary
+*.tiff binary
+*.tif binary
+
+# Fonts
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.7z binary
+*.rar binary
+
+# Compiled
+*.pyc binary
+*.pyo binary
+*.so binary
+*.dll binary
+*.dylib binary
+*.exe binary
+*.class binary
+*.o binary
+
+# Documents
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+
+# Audio/Video
+*.mp3 binary
+*.mp4 binary
+*.wav binary
+*.avi binary
+*.mov binary
+*.flv binary
+*.webm binary
+
+# -----------------------------------------------------------------------------
+# Merge Strategies
+# -----------------------------------------------------------------------------
+
+# Automatically resolve conflicts by keeping both versions
+README.md merge=union
+CHANGELOG.md merge=union
+CONTRIBUTORS.md merge=union
+
+# Package locks - Use ours strategy (prefer local changes)
+package-lock.json merge=ours
+yarn.lock merge=ours
+poetry.lock merge=ours
+Pipfile.lock merge=ours
+Gemfile.lock merge=ours
+
+# -----------------------------------------------------------------------------
+# Diff Settings
+# -----------------------------------------------------------------------------
+
+# Better diff for specific file types
+*.ipynb diff=jupyternotebook
+*.md diff=markdown
+*.py diff=python
+*.rb diff=ruby
+*.php diff=php
+
+# -----------------------------------------------------------------------------
+# Linguist Overrides (for GitHub language statistics)
+# -----------------------------------------------------------------------------
+
+# Documentation - Don't count towards language stats
+*.md linguist-documentation
+*.txt linguist-documentation
+docs/** linguist-documentation
+
+# Vendored code - Don't count towards language stats
+vendor/** linguist-vendored
+node_modules/** linguist-vendored
+third_party/** linguist-vendored
+
+# Generated code - Don't count towards language stats
+*.min.js linguist-generated
+*.min.css linguist-generated
+dist/** linguist-generated
+build/** linguist-generated
+coverage/** linguist-generated
+
+# -----------------------------------------------------------------------------
+# Export Ignore (files not included in archives)
+# -----------------------------------------------------------------------------
+
+.gitattributes export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
+.github/ export-ignore
+tests/ export-ignore
+*.test.* export-ignore
+*.spec.* export-ignore
+.vscode/ export-ignore
+.idea/ export-ignore

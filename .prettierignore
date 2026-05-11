@@ -1,0 +1,77 @@
+# =============================================================================
+# Prettier Ignore Patterns
+# =============================================================================
+
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+env/
+
+# Build outputs
+build/
+dist/
+out/
+target/
+*.min.js
+*.min.css
+
+# Coverage and test reports
+coverage/
+.nyc_output/
+htmlcov/
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+
+# Cache directories
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.next/
+.nuxt/
+
+# Documentation builds
+site/
+docs/_build/
+_site/
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Git files
+.git/
+.github/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Generated files
+*.generated.*
+*-generated.*
+
+# Language-specific
+__pycache__/
+*.pyc
+*.pyo
+
+# Markdown files with code blocks that shouldn't be reformatted
+# (uncomment if needed)
+# *.md

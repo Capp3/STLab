@@ -1,0 +1,342 @@
+# =============================================================================
+# OPERATING SYSTEM FILES
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# =============================================================================
+# DEVELOPMENT TOOLS & IDEs
+# =============================================================================
+
+# Visual Studio Code
+#.vscode/
+
+# PyCharm / IntelliJ
+#.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim/Neovim
+*.swp
+*.swo
+.vimrc.local
+.nvimrc.local
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =============================================================================
+# AI-POWERED DEVELOPMENT TOOLS
+# =============================================================================
+
+# Cursor AI
+# .cursor/
+
+# Windsurf AI
+.windsurf/
+.windsurf_cache/
+windsurf.log
+
+# Claude Code / Anthropic
+.claude/
+.claude_cache/
+claude.log
+
+# GitHub Copilot
+.copilot/
+
+# Tabnine
+.tabnine/
+tabnine.log
+
+# Codeium
+.codeium/
+.codeium_cache/
+
+# Amazon CodeWhisperer
+.codewhisperer/
+.codewhisperer_cache/
+
+# Replit Ghostwriter
+.replit/
+.replit_cache/
+
+# Continue AI
+.continue/
+continue.log
+
+# Aider
+.aider/
+aider.log
+
+# CodeT5 / Salesforce
+.codet5/
+.codet5_cache/
+
+# DeepCode / Snyk Code
+.deepcode/
+.snyk/
+
+# Kite
+.kite/
+kite.log
+
+# IntelliCode
+.intellicode/
+.intellicode_cache/
+
+# AI Code Assistants (Generic)
+.ai_assistant/
+.ai_cache/
+ai_workspace/
+
+# =============================================================================
+# VERSION CONTROL
+# =============================================================================
+
+# Git
+*.orig
+*.rej
+*.patch
+
+# =============================================================================
+# BUILD ARTIFACTS & DEPENDENCIES
+# =============================================================================
+
+# General build directories
+build/
+dist/
+dist-ssr/
+target/
+out/
+bin/
+obj/
+
+# Node.js / JavaScript / TypeScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.npm
+.yarn/
+.pnp.*
+
+# =============================================================================
+# ENVIRONMENT & CONFIGURATION
+# =============================================================================
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.envrc
+
+# Local configuration
+*.local
+
+# =============================================================================
+# DOCKER & CONTAINERS
+# =============================================================================
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# =============================================================================
+# LOGS & TEMPORARY FILES
+# =============================================================================
+
+# Log files
+logs/
+*.log
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# =============================================================================
+# CACHE DIRECTORIES
+# =============================================================================
+
+# Generic cache
+.cache/
+*.cache
+
+# =============================================================================
+# DOCUMENTATION BUILD
+# =============================================================================
+
+# MkDocs
+/site
+
+# Sphinx
+docs/_build/
+
+# =============================================================================
+# LANGUAGE-SPECIFIC PATTERNS (for reference/optional use in specific projects)
+# =============================================================================
+# Uncomment sections below as needed for specific project types
+
+# -----------------------------------------------------------------------------
+# PYTHON (Uncomment for Python projects)
+# -----------------------------------------------------------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Package management
+uv.lock
+#Pipfile.lock
+#poetry.lock
+#poetry.toml
+#pdm.lock
+#pdm.toml
+.pdm-python
+.pdm-build/
+#pixi.lock
+.pixi
+__pypackages__/
+
+# Distribution / packaging
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyBuilder
+.pybuilder/
+
+# Testing & Coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Virtual environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pyenv
+.python-version
+
+# Type checking & Linting
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Framework-specific
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+celerybeat-schedule
+celerybeat.pid
+
+# Specialized tools
+*.sage.py
+cython_debug/
+*.mo
+*.pot
+.pypirc
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+.streamlit/secrets.toml
+.abstra/
+
+# -----------------------------------------------------------------------------
+# END PYTHON SECTION
+# -----------------------------------------------------------------------------

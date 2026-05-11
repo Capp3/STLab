@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question or Discussion
+    url: https://github.com/yourusername/vibe_dev_template/discussions
+    about: Ask questions or start discussions about the template
+  - name: Documentation
+    url: https://github.com/yourusername/vibe_dev_template#readme
+    about: Read the documentation for usage instructions and examples
