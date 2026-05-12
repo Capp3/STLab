@@ -1,27 +1,34 @@
-# ST Lab — Progress
+# Progress
 
-## ARCHIVE — TASK-001 complete ✅
+## 2026-05-12 — Full Reset
 
-**Date:** 2026-05-11
+**Status:** Reset complete. Clean skeleton in place.
 
-| Artifact         | Location                                        |
-| ---------------- | ----------------------------------------------- |
-| Full task record | `memory-bank/archive/archive-TASK-001.md`       |
-| Reflection       | `memory-bank/reflection/reflection-TASK-001.md` |
+### What was learned from the first attempt
+
+| Area | Finding |
+|---|---|
+| React Flow + Zustand | `<ReactFlow>` v12 creates its own `ReactFlowProvider` internally. A second outer provider creates two conflicting stores. Never use an outer `ReactFlowProvider`. |
+| Zustand selectors | Full-store subscriptions (`useStore()`) in ancestor components cause `useSyncExternalStore` to force synchronous re-renders during React's commit phase. Always use selective selectors. |
+| useNodesState / useEdgesState | These RF hooks subscribe to RF's internal Zustand store via `useSyncExternalStore`. Using them in a component that is the parent of `<ReactFlow>` creates nested commit loops. Use plain `useState` instead. |
+| Build pace | Building faster than the operator can validate produces a broken system. Slow down. |
+
+### Current state
+
+- All development files deleted.
+- New project brief written (`docs/projectbrief.md` v2.0).
+- Clean Vite + React 18 + TypeScript skeleton in place.
+- No server, no database, no dependencies beyond React and Vite.
+
+### Next milestone
+
+TASK-003: Working Docker Compose stack (app + PostgreSQL + Redis) with a health endpoint. Operator test: `docker compose up` → browser shows placeholder page, no errors in logs.
 
 ---
 
-## Current state (post TASK-001)
+## Prior history (archived)
 
-The repository contains a runnable full-stack skeleton: Express API, Drizzle schema and migrations, bandwidth and PTP engines, React Flow editor, report pipeline, and Docker/Compose definitions. Build-time checks (`tsc`, Vite build, Drizzle generate) passed during the BUILD phase.
-
-**Recommended next work:** manual QA against `docs/projectbrief.md`, automated tests and CI, Inspector link editing completion, optional dist layout cleanup (see archive “Post-archive follow-ups”).
-
----
-
-## BUILD / REFLECT snapshot (historical)
-
-_Merged from pre-archive `progress.md` for traceability._
-
-- **Phase A–E:** Config, schema, API, engines, frontend, Docker — delivered per archive SUMMARY / IMPLEMENTATION.
-- **Validation:** Client and server TypeScript clean; Vite production build succeeded; initial SQL migration generated.
+| Task | Outcome |
+|---|---|
+| TASK-001: Docker bring-up | Fixed — Dockerfile used `npm ci` without a lock file; replaced with `npm install`. Added named volumes. Fixed Express SPA fallback route for Express 5 / path-to-regexp compatibility. |
+| TASK-002: React error #185 | Fixed — removed outer `ReactFlowProvider`, switched `FlowCanvas` to plain `useState`, used selective Zustand selectors in `App.tsx`. |
